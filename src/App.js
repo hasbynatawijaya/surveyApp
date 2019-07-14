@@ -1,25 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import DefaultLayout from "./layouts/DefaultLayout";
+import { Route, Switch } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "../src/store/ConfigureStore";
+
+import "../src/static/styles/styles.css";
+
+import Home from "./components/home/Home";
+import MasterQuestionnaire from "./components/admin/questionnaire/MasterQuestionnaire";
+import MasterQuestionnaireAdd from "./components/admin/questionnaire/MasterQuestionnaireAdd";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <DefaultLayout>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route
+            exact
+            path="/masterquestionnaire"
+            component={MasterQuestionnaire}
+          />
+          <Route
+            exact
+            path="/masterquestionnaire/add"
+            component={MasterQuestionnaireAdd}
+          />
+        </Switch>
+      </DefaultLayout>
+    </Provider>
   );
 }
 

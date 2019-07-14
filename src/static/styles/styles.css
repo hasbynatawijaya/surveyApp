@@ -1,0 +1,28 @@
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-color: #b2bec3;
+}
+
+/* <====== Refactoring ======> */
+
+.ui.menu {
+  background-color: #81d15e;
+  border-radius: 0;
+}
+
+.ui.menu .item {
+  color: #ffff;
+}
+
+/* <====== End Refactoring ======> */
+
+.dashboard-body {
+  padding: 0 3%;
+  margin-top: 30px;
+}
+
+.dashboard-menu {
+  background-color: red;
+}
