@@ -9,12 +9,16 @@ import "../src/static/styles/styles.css";
 import Home from "./components/home/Home";
 import MasterQuestionnaire from "./components/admin/questionnaire/MasterQuestionnaire";
 import MasterQuestionnaireAdd from "./components/admin/questionnaire/MasterQuestionnaireAdd";
+import MasterQuestionnaireEdit from "./components/admin/questionnaire/MasterQuestionnaireEdit";
+import Questionnaire from "./components/admin/questionnaire/Questionnaire";
+import Signup from "./components/signup/Signup";
 
 function App() {
   return (
     <Provider store={store}>
-      <DefaultLayout>
-        <Switch>
+      <Switch>
+        <Route exact path="/signup" component={Signup} />
+        <DefaultLayout>
           <Route exact path="/" component={Home} />
           <Route
             exact
@@ -26,8 +30,14 @@ function App() {
             path="/masterquestionnaire/add"
             component={MasterQuestionnaireAdd}
           />
-        </Switch>
-      </DefaultLayout>
+          <Route
+            exact
+            path="/masterquestionnaire/edit"
+            component={MasterQuestionnaireEdit}
+          />
+          <Route exact path="/questionnaire" component={Questionnaire} />
+        </DefaultLayout>
+      </Switch>
     </Provider>
   );
 }

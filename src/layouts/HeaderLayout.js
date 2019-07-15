@@ -33,13 +33,15 @@ export default class MenuExampleInvertedSegment extends Component {
         </Link>
 
         <Menu.Menu position="right">
-          <Menu.Item
-            name="signup"
-            active={activeItem === "signup"}
-            onClick={this.handleItemClick}
-          >
-            Signup
-          </Menu.Item>
+          <Link to="/signup">
+            <Menu.Item
+              name="signup"
+              active={activeItem === "signup"}
+              onClick={this.handleItemClick}
+            >
+              Signup
+            </Menu.Item>
+          </Link>
 
           <Menu.Item
             name="help"

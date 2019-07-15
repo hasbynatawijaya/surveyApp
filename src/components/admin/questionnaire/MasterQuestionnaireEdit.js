@@ -16,7 +16,7 @@ const questionOptions = [
   { key: "text", text: "Isian", value: "text" }
 ];
 
-class MasterQuestionnaireAdd extends Component {
+class MasterQuestionnaireEdit extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -206,4 +206,4 @@ class MasterQuestionnaireAdd extends Component {
   }
 }
 
-export default MasterQuestionnaireAdd;
+export default MasterQuestionnaireEdit;

@@ -7,6 +7,7 @@ import {
   Divider,
   Button
 } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -22,9 +23,10 @@ const Home = () => {
         <Header size="small">
           Lorem Ipsum is simply dummy text of the printing and typesetting
         </Header>
-
-        <Button primary>Isi Kuisioner</Button>
-        <Button secondary>Login Sebagai Admin</Button>
+        <Link to="/questionnaire">
+          <Button primary>Isi Kuisioner</Button>
+        </Link>
+        <Button color="green">Login Sebagai Admin</Button>
       </Grid.Column>
     </Grid>
   );

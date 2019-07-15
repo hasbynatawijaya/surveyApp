@@ -16,6 +16,17 @@ body {
   color: #ffff;
 }
 
+.ui.menu .active.item {
+  color: #ffff;
+}
+
+.ui.link.menu .item:hover,
+.ui.menu .dropdown.item:hover,
+.ui.menu .link.item:hover,
+.ui.menu a.item:hover {
+  color: #ffff;
+}
+
 /* <====== End Refactoring ======> */
 
 .dashboard-body {

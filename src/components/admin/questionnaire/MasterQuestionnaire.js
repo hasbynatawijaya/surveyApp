@@ -23,6 +23,7 @@ class MasterQuestionnaire extends Component {
               <Table.HeaderCell>Nama Grup Pertanyaan</Table.HeaderCell>
               <Table.HeaderCell>Kode Grup Pertanyaan</Table.HeaderCell>
               <Table.HeaderCell>Isi Pilihan</Table.HeaderCell>
+              <Table.HeaderCell />
             </Table.Row>
           </Table.Header>
 
@@ -41,6 +42,11 @@ class MasterQuestionnaire extends Component {
                 Udin
                 <br />
               </Table.Cell>
+              <Table.Cell>
+                <Link to="/masterquestionnaire/edit">
+                  <Icon name="edit" />
+                </Link>
+              </Table.Cell>
             </Table.Row>
 
             <Table.Row verticalAlign="middle">
@@ -50,6 +56,11 @@ class MasterQuestionnaire extends Component {
               <Table.Cell>Biodata</Table.Cell>
               <Table.Cell>01</Table.Cell>
               <Table.Cell verticalAlign="top">-</Table.Cell>
+              <Table.Cell>
+                <Link to="/masterquestionnaire/edit">
+                  <Icon name="edit" />
+                </Link>
+              </Table.Cell>
             </Table.Row>
           </Table.Body>
         </Table>
