@@ -9,11 +9,22 @@ import {
 } from "semantic-ui-react";
 import Form from "../../../reusable/Formsy/Form";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { addQuestion } from "../../../action/QuestionAction";
 
 const questionOptions = [
-  { key: "checkbox", text: "Pilihan", value: "checkbox" },
-  { key: "radio", text: "Pilihan Ganda", value: "radio" },
+  {
+    key: "multi-select",
+    text: "Pilihan Ganda (Beberapa Pilihan)",
+    value: "multi-select"
+  },
+  { key: "radio-dials", text: "Pilihan Ganda", value: "radio-dials" },
   { key: "text", text: "Isian", value: "text" }
+];
+
+const isAnswerOptions = [
+  { key: "y", text: "Harus Dijawab", value: "y" },
+  { key: "n", text: "Tidak Harus Dijawab", value: "n" }
 ];
 
 class MasterQuestionnaireAdd extends Component {
@@ -32,7 +43,32 @@ class MasterQuestionnaireAdd extends Component {
   }
 
   onValidSubmit = formData => {
-    console.log(formData);
+    let option_choices = [];
+    let data = Object.keys(formData);
+
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].includes("option_choice_name")) {
+        let choice = data[i];
+        option_choices.push({ option_choice_name: formData[choice] });
+        delete formData[choice];
+      }
+    }
+
+    formData.option_group = {
+      option_group_code: formData.question_group_code,
+      option_group_name: formData.question_group_name
+    };
+
+    delete formData.question_group_code;
+    delete formData.question_group_name;
+
+    if (formData.input_type_name === "text") {
+      formData.option_choices = [];
+    } else {
+      formData.option_choices = option_choices;
+    }
+
+    this.props.addQuestion(formData);
   };
 
   handleChangeQuestionType(event, data) {
@@ -58,7 +94,7 @@ class MasterQuestionnaireAdd extends Component {
             <Form.Input
               width={12}
               required
-              name={`checkQuestion_${checkChoicesCount}`}
+              name={`option_choice_name,${checkChoicesCount}`}
               placeholder={`Jawaban`}
               errorLabel={<Label color="red" pointing />}
             />
@@ -112,7 +148,7 @@ class MasterQuestionnaireAdd extends Component {
 
   render() {
     const { checkChoices, questionType } = this.state;
-
+    const { loading } = this.props;
     return (
       <Segment>
         <Header size="large">Master Data Kuisioner</Header>
@@ -132,15 +168,22 @@ class MasterQuestionnaireAdd extends Component {
           />
           <Form.Input
             // required
-            name="description"
-            label="Deskripsi"
-            placeholder="Deskripsi"
+            name="question_subtext"
+            label="Deskripsi Pertanyaan"
+            placeholder="Deskripsi Pertanyaan"
             // validations="isWords"
             errorLabel={<Label color="red" pointing />}
             // validationErrors={{
             //   isWords: "No numbers or special characters allowed",
             //   isDefaultRequiredValue: "First Name is Required"
             // }}
+          />
+          <Form.Select
+            selection
+            label="Harus Dijawab"
+            name="question_required"
+            options={isAnswerOptions}
+            placeholder="Harus Dijawab?"
           />
           <Form.Input
             // required
@@ -170,7 +213,7 @@ class MasterQuestionnaireAdd extends Component {
           <Form.Select
             selection
             label="Pilih Jenis Pertanyaan"
-            name="question_type"
+            name="input_type_name"
             onChange={this.handleChangeQuestionType}
             options={questionOptions}
             placeholder="Jenis Pertanyaan"
@@ -187,17 +230,19 @@ class MasterQuestionnaireAdd extends Component {
                 content="Submit"
                 color="green"
               >
-                Tambah Pertanyaan
+                Tambah Jawaban
               </Form.Button>
             </Form.Group>
           )}
 
           <Form.Field>
-            <Button primary type="submit">
-              Submit
+            <Button disabled={loading} primary type="submit">
+              {loading ? "Loading... " : "Submit"}
             </Button>
             <Link to="/masterquestionnaire">
-              <Button type="button">Cancel</Button>
+              <Button disabled={loading} type="button">
+                Cancel
+              </Button>
             </Link>
           </Form.Field>
         </Form>
@@ -206,4 +251,11 @@ class MasterQuestionnaireAdd extends Component {
   }
 }
 
-export default MasterQuestionnaireAdd;
+const mapStateToProps = state => ({
+  loading: state.async.asyncAction
+});
+
+export default connect(
+  mapStateToProps,
+  { addQuestion }
+)(MasterQuestionnaireAdd);
