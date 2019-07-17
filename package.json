@@ -2,7 +2,6 @@
   "name": "survey-app",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://survey-api-lumen.herokuapp.com",
   "dependencies": {
     "axios": "^0.19.0",
     "formsy-react": "^1.1.5",
